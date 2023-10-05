@@ -1,0 +1,62 @@
+name: b2b_ecommerce
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  #GETX
+  get: 4.6.5
+  #FOR UI
+  cupertino_icons: ^1.0.2
+  smooth_page_indicator: ^1.0.0+2
+  flutter_staggered_grid_view: ^0.6.2
+  font_awesome_flutter:
+    path: ../font_awesome_flutter-master/
+  sizer: ^2.0.15
+  #FOR STORAGE
+  shared_preferences: ^2.0.15
+  #FOR IMAGE
+  cached_network_image: ^3.2.0
+  #FOR CAMERA USAGE
+  camera: ^0.9.7+1
+  image: ^3.1.0
+  image_picker: ^0.8.5+3
+  #FOR API
+  graphql_flutter: ^5.0.1
+  #FOR iINTERNET CHECKER
+  internet_connection_checker: ^0.0.1+3
+  connectivity_plus: 2.2.1
+  flutter_polyline_points: ^1.0.0
+  #FOR location
+  geolocator: ^8.2.0
+  location: ^4.2.0
+  #FOR LOADING
+  shimmer: ^2.0.0
+  http: ^0.13.4
+  intl: ^0.17.0
+  flutter_svg: ^1.1.5
+  infinite_scroll_pagination: ^3.2.0
+  qr_code_scanner: ^1.0.1
+dev_dependencies:
+  flutter_lints: 2.0.1
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/lottie/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/poppins/Poppins-Italic.ttf
+          style: italic
+        - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
+          weight: 700
