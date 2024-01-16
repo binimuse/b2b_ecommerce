@@ -45,72 +45,74 @@ class MyOrdersController extends GetxController {
         document: gql(orderQueryMutation.getMyOrdersHistory()),
       ),
     );
-    
+
     if (!result.hasException) {
-      for (var i = 0;
-          i < result.data!["auth"]["retailer"]["orders"].length;
-          i++) {
-        String createdAtHuman =
-            result.data!["auth"]["retailer"]["orders"][i]["created_at_human"];
-        List<OrderItemModel> items = [];
-        List<ShipModel> shipModel = [];
-        dynamic total_price =
-            result.data!["auth"]["retailer"]["orders"][i]["total_price"];
-        dynamic oid = result.data!["auth"]["retailer"]["orders"][i]["id"];
+      if (result.data!["auth"]["retailer"] != null) {
+        for (var i = 0;
+            i < result.data!["auth"]["retailer"]["orders"].length;
+            i++) {
+          String createdAtHuman =
+              result.data!["auth"]["retailer"]["orders"][i]["created_at_human"];
+          List<OrderItemModel> items = [];
+          List<ShipModel> shipModel = [];
+          dynamic total_price =
+              result.data!["auth"]["retailer"]["orders"][i]["total_price"];
+          dynamic oid = result.data!["auth"]["retailer"]["orders"][i]["id"];
 
-        // orderItems.clear();
+          // orderItems.clear();
 
-        for (var j = 0;
-            j < result.data!["auth"]["retailer"]["orders"][i]["items"].length;
-            j++) {
-          items.add(OrderItemModel(
-            quantity: result.data!["auth"]["retailer"]["orders"][i]["items"][j]
-                ["quantity"],
-            iid: int.parse(result.data!["auth"]["retailer"]["orders"][i]
-                ["items"][j]["id"]),
-            image: result.data!["auth"]["retailer"]["orders"][i]["items"][j]
-                ["product_sku"]["product"]["images"][0]["original_url"],
-            name: result.data!["auth"]["retailer"]["orders"][i]["items"][j]
-                ["product_sku"]["product"]["name"],
-            price: result.data!["auth"]["retailer"]["orders"][i]["items"][j]
-                ["product_sku"]["price"],
-            shipModel: shipModel,
-          ));
-          if (result
-                  .data!["auth"]["retailer"]["orders"][i]["items"][j]
-                      ["shipment_items"]
-                  .length >
-              0) {
-            shipModel.add(ShipModel(
-                shipmentID: "",
-                departure_time: result.data!["auth"]["retailer"]["orders"][i]["items"]
-                    [j]["shipment_items"][0]["shipment"]["departure_time"],
-                arrival_time: result
+          for (var j = 0;
+              j < result.data!["auth"]["retailer"]["orders"][i]["items"].length;
+              j++) {
+            items.add(OrderItemModel(
+              quantity: result.data!["auth"]["retailer"]["orders"][i]["items"]
+                  [j]["quantity"],
+              iid: int.parse(result.data!["auth"]["retailer"]["orders"][i]
+                  ["items"][j]["id"]),
+              image: result.data!["auth"]["retailer"]["orders"][i]["items"][j]
+                  ["product_sku"]["product"]["images"][0]["original_url"],
+              name: result.data!["auth"]["retailer"]["orders"][i]["items"][j]
+                  ["product_sku"]["product"]["name"],
+              price: result.data!["auth"]["retailer"]["orders"][i]["items"][j]
+                  ["product_sku"]["price"],
+              shipModel: shipModel,
+            ));
+            if (result
                     .data!["auth"]["retailer"]["orders"][i]["items"][j]
                         ["shipment_items"]
-                    .last["shipment"]["arrival_time"],
-                status: result.data!["auth"]["retailer"]["orders"][i]["items"][j]["shipment_items"].last["shipment"]
-                    ["status"],
-                from: result
-                    .data!["auth"]["retailer"]["orders"][i]["items"][j]["shipment_items"]
-                    .last["shipment"]["from"]["__typename"],
-                fromname: result.data!["auth"]["retailer"]["orders"][i]["items"][j]["shipment_items"].last["shipment"]["from"]["name"],
-                to: result.data!["auth"]["retailer"]["orders"][i]["items"][j]["shipment_items"].last["shipment"]["to"]["__typename"],
-                toname: result.data!["auth"]["retailer"]["orders"][i]["items"][j]["shipment_items"].last["shipment"]["to"]["name"]));
+                    .length >
+                0) {
+              shipModel.add(ShipModel(
+                  shipmentID: "",
+                  departure_time: result.data!["auth"]["retailer"]["orders"][i]["items"]
+                      [j]["shipment_items"][0]["shipment"]["departure_time"],
+                  arrival_time: result
+                      .data!["auth"]["retailer"]["orders"][i]["items"][j]
+                          ["shipment_items"]
+                      .last["shipment"]["arrival_time"],
+                  status: result.data!["auth"]["retailer"]["orders"][i]["items"][j]["shipment_items"].last["shipment"]
+                      ["status"],
+                  from: result
+                      .data!["auth"]["retailer"]["orders"][i]["items"][j]["shipment_items"]
+                      .last["shipment"]["from"]["__typename"],
+                  fromname: result.data!["auth"]["retailer"]["orders"][i]["items"][j]["shipment_items"].last["shipment"]["from"]["name"],
+                  to: result.data!["auth"]["retailer"]["orders"][i]["items"][j]["shipment_items"].last["shipment"]["to"]["__typename"],
+                  toname: result.data!["auth"]["retailer"]["orders"][i]["items"][j]["shipment_items"].last["shipment"]["to"]["name"]));
+            }
+
+            // shipModels.clear();
+
           }
 
-          // shipModels.clear();
+          orderData.add(OrderHistoryModel(
+            created_at_human: createdAtHuman,
+            items: items,
+            total_price: total_price,
+            oid: oid,
+          ));
 
+          loadingOrderHistory(true);
         }
-
-        orderData.add(OrderHistoryModel(
-          created_at_human: createdAtHuman,
-          items: items,
-          total_price: total_price,
-          oid: oid,
-        ));
-
-        loadingOrderHistory(true);
       }
     } else {
       loadingOrderHistory(false);

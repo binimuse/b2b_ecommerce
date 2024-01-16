@@ -13,7 +13,7 @@ import '../../../../Services/graphql_conf.dart';
 import '../../../../constant/shimmer_loading.dart';
 import '../data/model/last_search_model.dart';
 
-class SearchController extends GetxController {
+class SearchControllers extends GetxController {
   var shimmerLoading = ShimmerLoading();
   var reusableWidget = ReusableWidget();
 

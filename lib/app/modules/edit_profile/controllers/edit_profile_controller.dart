@@ -89,9 +89,11 @@ class EditProfileController extends GetxController {
       ),
     );
 
-    if (!result.hasException) {
+    if (!result.hasException && result.data!["auth"]["retailer"] != null) {
       getUser.add(GestUserModel(
-        id: int.parse(result.data!["auth"]["retailer"]["id"]),
+        id: result.data!["auth"]["retailer"] != null
+            ? int.parse(result.data!["auth"]["retailer"]["id"])
+            : null,
         name: result.data!["auth"]["retailer"]["name"],
         address: result.data!["auth"]["retailer"]["address"],
         city: result.data!["auth"]["retailer"]["city"],
@@ -116,7 +118,6 @@ class EditProfileController extends GetxController {
   }
 
   updateProfile() async {
-   
     GraphQLClient client = graphQLConfiguration.clientToQuery();
 
     QueryResult result = await client.mutate(
@@ -161,7 +162,6 @@ class EditProfileController extends GetxController {
           radius: 30);
     }
   }
-
 
   @override
   void onClose() {}

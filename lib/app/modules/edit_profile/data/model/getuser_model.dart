@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 class GestUserModel {
-  late int id;
+  late int? id;
   late String name;
 
   late String address;
@@ -11,7 +11,7 @@ class GestUserModel {
   late String contact_email;
 
   GestUserModel(
-      {required this.id,
+      {this.id,
       required this.name,
       required this.address,
       required this.city,

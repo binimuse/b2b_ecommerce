@@ -8,7 +8,7 @@ import 'package:sizer/sizer.dart';
 
 import '../controllers/search_controller.dart';
 
-class SearchView extends GetView<SearchController> {
+class SearchView extends GetView<SearchControllers> {
   const SearchView({super.key});
 
   @override

@@ -48,39 +48,42 @@ class CartController extends GetxController {
 
     if (!result.hasException) {
       loadingCart(true);
-      for (var i = 0;
-          i < result.data!["auth"]["retailer"]["carts"].length;
-          i++) {
-        List<VariModel> variModels = [];
 
-        for (var k = 0;
-            k <
-                result
-                    .data!["auth"]["retailer"]["carts"][i]["product_sku"]
-                        ["variants"]
-                    .length;
-            k++) {
-          variModels.add(VariModel(
-            attributename: result.data!["auth"]["retailer"]["carts"][i]
-                ["product_sku"]["variants"][k]["attribute"]["name"],
-            attributeValues: result.data!["auth"]["retailer"]["carts"][i]
-                ["product_sku"]["variants"][k]["attributeValue"]["value"],
+      if (result.data!["auth"]["retailer"] != null) {
+        for (var i = 0;
+            i < result.data!["auth"]["retailer"]["carts"].length;
+            i++) {
+          List<VariModel> variModels = [];
+
+          for (var k = 0;
+              k <
+                  result
+                      .data!["auth"]["retailer"]["carts"][i]["product_sku"]
+                          ["variants"]
+                      .length;
+              k++) {
+            variModels.add(VariModel(
+              attributename: result.data!["auth"]["retailer"]["carts"][i]
+                  ["product_sku"]["variants"][k]["attribute"]["name"],
+              attributeValues: result.data!["auth"]["retailer"]["carts"][i]
+                  ["product_sku"]["variants"][k]["attributeValue"]["value"],
+            ));
+          }
+
+          cartList.add(CartModel(
+            id: int.parse(result.data!["auth"]["retailer"]["carts"][i]["id"]),
+            qty: result.data!["auth"]["retailer"]["carts"][i]["quantity"],
+            prodactName: result.data!["auth"]["retailer"]["carts"][i]
+                ["product_sku"]["product"]["name"],
+            prodactDesc: result.data!["auth"]["retailer"]["carts"][i]
+                ["product_sku"]["product"]["description"],
+            price: result.data!["auth"]["retailer"]["carts"][i]["product_sku"]
+                ["price"],
+            image: result.data!["auth"]["retailer"]["carts"][i]["product_sku"]
+                ["product"]["images"][0]["original_url"],
+            variModels: variModels,
           ));
         }
-
-        cartList.add(CartModel(
-          id: int.parse(result.data!["auth"]["retailer"]["carts"][i]["id"]),
-          qty: result.data!["auth"]["retailer"]["carts"][i]["quantity"],
-          prodactName: result.data!["auth"]["retailer"]["carts"][i]
-              ["product_sku"]["product"]["name"],
-          prodactDesc: result.data!["auth"]["retailer"]["carts"][i]
-              ["product_sku"]["product"]["description"],
-          price: result.data!["auth"]["retailer"]["carts"][i]["product_sku"]
-              ["price"],
-          image: result.data!["auth"]["retailer"]["carts"][i]["product_sku"]
-              ["product"]["images"][0]["original_url"],
-          variModels: variModels,
-        ));
       }
 
       loadingCart(false);

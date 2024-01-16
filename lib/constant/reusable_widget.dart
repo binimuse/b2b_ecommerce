@@ -392,7 +392,7 @@ class ReusableWidget {
     );
   }
 
-  Widget buildPharmacyList(context, index, data, SearchController controller) {
+  Widget buildPharmacyList(context, index, data, SearchControllers controller) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
