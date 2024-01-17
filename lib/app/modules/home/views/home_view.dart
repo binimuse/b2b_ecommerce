@@ -71,7 +71,7 @@ class HomeView extends GetView<HomeController> {
           height: CustomSizes.mp_v_2,
         ),
         Text(
-          "ACT",
+          "ANT",
           textAlign: TextAlign.center,
           style: Theme.of(context)
               .textTheme

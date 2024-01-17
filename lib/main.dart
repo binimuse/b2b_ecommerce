@@ -24,7 +24,7 @@ Sizer App() {
         client: graphQLConfiguration.client,
         child: CacheProvider(
           child: GetMaterialApp(
-            title: "Act B2B",
+            title: "ANT B2B",
             // initialBinding: NetworkBinding(),
             theme: CustomTheme().lightTheme,
 

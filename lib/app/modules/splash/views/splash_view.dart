@@ -61,8 +61,6 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     _controller2.forward().whenCompleteOrCancel(() {
       Future.delayed(const Duration(milliseconds: 1500), () {
         splashController.checkIfLogin();
-        
-     
       });
     });
   }
@@ -96,7 +94,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
                 child: Transform.translate(
                   offset: Offset(0, -_animation1.value * 1.5),
                   child: Text(
-                    "ACT",
+                    "ANT",
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                           color: CustomColors.white,

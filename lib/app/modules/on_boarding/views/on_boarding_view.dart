@@ -29,7 +29,6 @@ class OnBoardingView extends GetView<OnBoardingController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
             ///ACT HEADER
             buildActHeader(context),
 
@@ -46,7 +45,9 @@ class OnBoardingView extends GetView<OnBoardingController> {
     );
   }
 
-  Obx buildNextButton(BuildContext context,) {
+  Obx buildNextButton(
+    BuildContext context,
+  ) {
     return Obx(() {
       if (controller.currentPage.value == 2) {
         return Container(
@@ -59,13 +60,9 @@ class OnBoardingView extends GetView<OnBoardingController> {
           ),
           child: CustomNormalButton(
             text: "Start",
-            textStyle: Theme
-                .of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(
-              color: CustomColors.white,
-            ),
+            textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: CustomColors.white,
+                ),
             bgColor: CustomColors.blue,
             rightIcon: Icon(
               FontAwesomeIcons.arrowRight,
@@ -92,13 +89,9 @@ class OnBoardingView extends GetView<OnBoardingController> {
           ),
           child: CustomNormalButtonBorder(
             text: "Next",
-            textStyle: Theme
-                .of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(
-              color: CustomColors.blue,
-            ),
+            textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: CustomColors.blue,
+                ),
             borderColor: CustomColors.blue,
             bgColor: CustomColors.white,
             rightIcon: Icon(
@@ -131,10 +124,9 @@ class OnBoardingView extends GetView<OnBoardingController> {
 
   Text buildActHeader(BuildContext context) {
     return Text(
-      "ACT",
+      "ANT",
       textAlign: TextAlign.center,
-      style: Theme
-          .of(context)
+      style: Theme.of(context)
           .textTheme
           .headlineLarge
           ?.copyWith(color: CustomColors.blue, fontWeight: FontWeight.bold),
@@ -157,19 +149,19 @@ class OnBoardingView extends GetView<OnBoardingController> {
         CarouselItem(
           title: "To Your Place",
           subTitle:
-          "We bring your order to your own place , also make you be able to track your orders",
+              "We bring your order to your own place , also make you be able to track your orders",
           image: AppAssets.locationSearchPana,
         ),
         CarouselItem(
           title: "To Your Place",
           subTitle:
-          "We bring your order to your own place , also make you be able to track your orders",
+              "We bring your order to your own place , also make you be able to track your orders",
           image: AppAssets.logisticsPana,
         ),
         CarouselItem(
           title: "To Your Place",
           subTitle:
-          "We bring your order to your own place , also make you be able to track your orders",
+              "We bring your order to your own place , also make you be able to track your orders",
           image: AppAssets.deliveryAddressPana,
         ),
       ],
