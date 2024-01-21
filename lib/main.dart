@@ -10,7 +10,8 @@ import 'package:sizer/sizer.dart';
 
 import 'app/routes/app_pages.dart';
 
-void main() {
+void main() async {
+  await Future<void>.delayed(const Duration(milliseconds: 5000));
   runApp(
     App(),
   );
